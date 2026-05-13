@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "./supabase";
 import LoginRegister from "./LoginRegister";
 import Dashboard from "./Dashboard";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -65,16 +66,22 @@ export default function App() {
     );
   }
 
-  return session ? (
-    <Dashboard
-      user={session.user}
-      onLogout={handleLogout}
-      theme={theme}
-      setTheme={setTheme}
-      darkMode={darkMode}
-      setDarkMode={setDarkMode}
-    />
-  ) : (
-    <LoginRegister />
-  );
+ return (
+  <>
+    <Toaster position="top-right" />
+
+    {user ? (
+      <Dashboard
+        user={user}
+        onLogout={handleLogout}
+        theme={theme}
+        setTheme={setTheme}
+        darkMode={darkMode}
+        setDarkMode={setDarkMode}
+      />
+    ) : (
+      <LoginRegister />
+    )}
+  </>
+);
 }
