@@ -40,6 +40,10 @@ export default function StatsSection({
     (item) => item.date === today
   ).length;
 
+  const completedCount = schedules.filter(
+  (item) => item.completed
+).length;
+
   return (
     <section className="section">
       <div className="sectionHead">
@@ -60,6 +64,10 @@ export default function StatsSection({
           <h2>{todayCount}</h2>
           <p>Jadwal Hari Ini</p>
         </div>
+        <div className="featureCard">
+  <h2>{completedCount}</h2>
+  <p>Jadwal Selesai</p>
+</div>
       </div>
 
       <div

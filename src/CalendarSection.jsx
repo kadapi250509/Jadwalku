@@ -124,7 +124,18 @@ export default function CalendarSection({
       }
     );
   };
+const toggleComplete = async (item) => {
+  const { error } = await supabase
+    .from("schedules")
+    .update({
+      completed: !item.completed,
+    })
+    .eq("id", item.id);
 
+  if (!error) {
+    reloadSchedules();
+  }
+};
   return (
     <section className="section">
       <div className="sectionHead">
@@ -203,9 +214,16 @@ export default function CalendarSection({
                 key={item.id}
               >
                 <div>
-                  <strong>
-                    {item.title}
-                  </strong>
+                  <strong
+  style={{
+    textDecoration: item.completed
+      ? "line-through"
+      : "none",
+    opacity: item.completed ? 0.6 : 1,
+  }}
+>
+  {item.title}
+</strong>
 
                   <p>
                     📅{" "}
@@ -217,27 +235,30 @@ export default function CalendarSection({
                   </p>
                 </div>
 
-                <div className="calendarActions">
-                  <button
-                    className="editBtn"
-                    onClick={() =>
-                      startEdit(item)
-                    }
-                    disabled={saving}
-                  >
-                    Edit
-                  </button>
+               <div className="calendarActions">
+  <button
+    className="doneBtn"
+    onClick={() => toggleComplete(item)}
+  >
+    {item.completed ? "Batal" : "Selesai"}
+  </button>
 
-                  <button
-                    className="deleteBtn"
-                    onClick={() =>
-                      deleteSchedule(item.id)
-                    }
-                    disabled={saving}
-                  >
-                    Hapus
-                  </button>
-                </div>
+  <button
+    className="editBtn"
+    onClick={() => startEdit(item)}
+    disabled={saving}
+  >
+    Edit
+  </button>
+
+  <button
+    className="deleteBtn"
+    onClick={() => deleteSchedule(item.id)}
+    disabled={saving}
+  >
+    Hapus
+  </button>
+</div>
               </div>
             ))
           )}

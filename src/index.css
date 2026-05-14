@@ -911,3 +911,41 @@ body.dark .aiTextarea {
   margin-bottom: 8px;
   color: var(--primary);
 }
+.doneBtn {
+  background: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 700;
+}
+.calendarActions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.editBtn,
+.deleteBtn,
+.doneBtn,
+.cancelBtn {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.calendarActions button {
+  min-width: 90px;
+}
+.calendarActions {
+  display: flex;
+  gap: 12px;
+}
+
+.calendarActions button {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
