@@ -5,6 +5,7 @@ import CalendarSection from "./CalendarSection";
 import MonthlyCalendar from "./MonthlyCalendar";
 import AIPlannerSection from "./AIPlannerSection";
 import StatsSection from "./StatsSection";
+import ReminderChecker from "./ReminderChecker";
 
 export default function Dashboard({
   user,
@@ -130,6 +131,8 @@ export default function Dashboard({
       </aside>
 
       <main className="main">
+        <ReminderChecker schedules={schedules} />
+        
         <Navbar
           user={user}
           onLogout={onLogout}
