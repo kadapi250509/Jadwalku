@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import CalendarSection from "./CalendarSection";
 import MonthlyCalendar from "./MonthlyCalendar";
 import AIPlannerSection from "./AIPlannerSection";
+import StatsSection from "./StatsSection";
 
 export default function Dashboard({
   user,
@@ -191,6 +192,7 @@ export default function Dashboard({
         </section>
 
         <MonthlyCalendar schedules={schedules} />
+        <StatsSection schedules={schedules} />
 
         <section className="section" id="profil">
           <div className="sectionHead">

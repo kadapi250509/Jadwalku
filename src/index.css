@@ -895,3 +895,19 @@ body.dark .aiTextarea {
     flex: 1;
   }
 }
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.statsGrid .featureCard {
+  text-align: center;
+}
+
+.statsGrid h2 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
