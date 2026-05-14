@@ -11,6 +11,7 @@ export default function CalendarSection({
   const [time, setTime] = useState("");
   const [editId, setEditId] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [filter, setFilter] = useState("all");
   const [error, setError] = useState("");
 
   const resetForm = () => {
@@ -136,6 +137,23 @@ const toggleComplete = async (item) => {
     reloadSchedules();
   }
 };
+const today = new Date()
+  .toISOString()
+  .split("T")[0];
+
+const filteredSchedules = schedules.filter(
+  (item) => {
+    if (filter === "today") {
+      return item.date === today;
+    }
+
+    if (filter === "completed") {
+      return item.completed;
+    }
+
+    return true;
+  }
+);
   return (
     <section className="section">
       <div className="sectionHead">
@@ -147,6 +165,19 @@ const toggleComplete = async (item) => {
       </div>
 
       <div className="calendarBox">
+        <div className="filterBox">
+  <button onClick={() => setFilter("all")}>
+    Semua
+  </button>
+
+  <button onClick={() => setFilter("today")}>
+    Hari Ini
+  </button>
+
+  <button onClick={() => setFilter("completed")}>
+    Selesai
+  </button>
+</div>
         <div className="calendarForm">
           <input
             type="text"
@@ -208,7 +239,7 @@ const toggleComplete = async (item) => {
               ditambahkan.
             </p>
           ) : (
-            schedules.map((item) => (
+            filteredSchedules.map((item) => (
               <div
                 className="calendarItem"
                 key={item.id}

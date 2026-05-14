@@ -949,3 +949,16 @@ body.dark .aiTextarea {
   font-weight: bold;
   cursor: pointer;
 }
+.filterBox {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filterBox button {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+}
