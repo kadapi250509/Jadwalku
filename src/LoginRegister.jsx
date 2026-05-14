@@ -26,11 +26,13 @@ export default function LoginRegister() {
         password,
       });
 
-      if (error) {
-        setMessage(error.message);
-      } else {
-        setMessage("Login berhasil.");
-      }
+    if (error) {
+       setMessage(error.message);
+      toast.error(error.message);
+    } else {
+      setMessage("Login berhasil.");
+      toast.success("Login berhasil!");
+    }
     } else {
       const { data, error } = await supabase.auth.signUp({
         email,
@@ -42,16 +44,18 @@ export default function LoginRegister() {
         },
       });
 
-      if (error) {
-        setMessage(error.message);
-      } else {
+    if (error) {
+      setMessage(error.message);
+      toast.error(error.message);
+    }
+      {
         if (data.session) {
-          setMessage("Akun berhasil dibuat.");
-        } else {
-          setMessage("Akun dibuat. Cek email untuk verifikasi.");
-        }
-        setIsLogin(true);
-        setPassword("");
+  setMessage("Akun berhasil dibuat.");
+  toast.success("Akun berhasil dibuat!");
+} else {
+  setMessage("Cek email untuk verifikasi.");
+  toast.success("Cek email untuk verifikasi!");
+}
       }
     }
 

@@ -7,6 +7,9 @@ import { Toaster } from "react-hot-toast";
 export default function App() {
   const [session, setSession] = useState(null);
 
+  const [theme, setTheme] = useState("#6d5dfc");
+  const [darkMode, setDarkMode] = useState(false);
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -21,6 +24,16 @@ export default function App() {
     return () => subscription.unsubscribe();
   }, []);
 
+  useEffect(() => {
+    document.documentElement.style.setProperty("--primary", theme);
+
+    if (darkMode) {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.remove("dark");
+    }
+  }, [theme, darkMode]);
+
   return (
     <>
       <Toaster position="top-right" />
@@ -29,6 +42,10 @@ export default function App() {
         <Dashboard
           user={session.user}
           onLogout={() => supabase.auth.signOut()}
+          theme={theme}
+          setTheme={setTheme}
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
         />
       ) : (
         <LoginRegister />
